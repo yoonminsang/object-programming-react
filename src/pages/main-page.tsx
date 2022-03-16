@@ -9,6 +9,9 @@ const MainPage: React.FC = () => {
         <li>
           <Link to="/coffe">커피 공화국</Link>
         </li>
+        <li>
+          <Link to="/AliceInWonderland">이상한 나라의 앨리스</Link>
+        </li>
       </nav>
     </>
   );
