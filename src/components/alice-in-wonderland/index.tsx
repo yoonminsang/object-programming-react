@@ -24,24 +24,27 @@ const AliceInWonderland: React.FC = () => {
   const [height, setHeight] = useState<number>(130);
   const [location, setLocation] = useState<TLocation>('문 밖');
 
-  const onPrintHeight = useCallback(() => {
+  const onPrintHeight = () => {
     setPrint(height);
-  }, [height]);
+  };
 
   const onPrintLocation = useCallback(() => {
     setPrint(location);
   }, [location]);
 
-  const onChangeHeight = useCallback((changeHeight: number) => {
-    setHeight((height) => {
-      if (height + changeHeight < 20) {
-        return 20;
-      }
-      return height + changeHeight;
-    });
-  }, []);
+  const onChangeHeight = useCallback(
+    (changeHeight: number) => {
+      setHeight((height) => {
+        if (height + changeHeight < 20) {
+          return 20;
+        }
+        return height + changeHeight;
+      });
+    },
+    [setHeight],
+  );
 
-  const onGoOutside = useCallback(() => {
+  const onGoOutside = () => {
     if (location === '문 안') {
       return alert('이미 문 안입니다.');
     }
@@ -50,7 +53,7 @@ const AliceInWonderland: React.FC = () => {
     }
     alert('문 안으로 들어갑니다');
     setLocation('문 안');
-  }, [height, location]);
+  };
 
   return (
     <Wrapper>
@@ -60,7 +63,10 @@ const AliceInWonderland: React.FC = () => {
         <Button onClick={onPrintLocation}>위치</Button>
       </FlexRow>
       <FlexRow>
-        <AliceController onChangeHeight={onChangeHeight} onGoOutside={onGoOutside} />
+        <AliceController onChangeHeight={onChangeHeight} />
+        <Button isRound onClick={onGoOutside}>
+          문을 통과하다
+        </Button>
       </FlexRow>
     </Wrapper>
   );

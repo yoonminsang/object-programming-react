@@ -7,10 +7,9 @@ const ONE_MUSHROOM = 10;
 
 interface Props {
   onChangeHeight: (height: number) => void;
-  onGoOutside: () => void;
 }
 
-const AliceController: React.FC<Props> = ({ onChangeHeight, onGoOutside }) => {
+const AliceController: React.FC<Props> = ({ onChangeHeight }) => {
   const [, setBeverage] = useState<number>(200); // ml
   const [, setCake] = useState<number>(1000); // g
   const [, setMushromm] = useState<number>(100); // g
@@ -67,11 +66,8 @@ const AliceController: React.FC<Props> = ({ onChangeHeight, onGoOutside }) => {
       <Button isRound onClick={onEatMushroom}>
         버섯을 먹다
       </Button>
-      <Button isRound onClick={onGoOutside}>
-        문을 통과하다
-      </Button>
     </>
   );
 };
 
-export default AliceController;
+export default React.memo(AliceController);
