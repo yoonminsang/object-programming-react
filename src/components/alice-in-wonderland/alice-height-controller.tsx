@@ -9,7 +9,7 @@ interface Props {
   onChangeHeight: (height: number) => void;
 }
 
-const AliceController: React.FC<Props> = ({ onChangeHeight }) => {
+const AliceHeightController: React.FC<Props> = ({ onChangeHeight }) => {
   const [, setBeverage] = useState<number>(200); // ml
   const [, setCake] = useState<number>(1000); // g
   const [, setMushromm] = useState<number>(100); // g
@@ -70,4 +70,4 @@ const AliceController: React.FC<Props> = ({ onChangeHeight }) => {
   );
 };
 
-export default React.memo(AliceController);
+export default React.memo(AliceHeightController);

@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import Button from '../common/button';
-import AliceController from './alice-controller';
+import AliceHeightController from './alice-height-controller';
 
 const Wrapper = styled.div``;
 
@@ -63,7 +63,7 @@ const AliceInWonderland: React.FC = () => {
         <Button onClick={onPrintLocation}>위치</Button>
       </FlexRow>
       <FlexRow>
-        <AliceController onChangeHeight={onChangeHeight} />
+        <AliceHeightController onChangeHeight={onChangeHeight} />
         <Button isRound onClick={onGoOutside}>
           문을 통과하다
         </Button>
