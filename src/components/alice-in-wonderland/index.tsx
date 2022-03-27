@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import Button from '../common/button';
 
@@ -49,22 +49,49 @@ const AliceInWonderland: React.FC = () => {
   }, []);
 
   const onDrkinkBeverage = useCallback(() => {
-    if (beverage <= ONE_BEVERAGE) {
-      alert('음료수가 없습니다');
-      return;
-    }
-    setBeverage(beverage - ONE_BEVERAGE);
+    setBeverage((beverage) => {
+      if (beverage < ONE_BEVERAGE) {
+        alert('음료수가 없습니다');
+        return beverage;
+      }
+      return beverage - ONE_BEVERAGE;
+    });
     onChangeHeight(-100);
-  }, [beverage, onChangeHeight]);
+  }, [onChangeHeight]);
 
   const onEatCake = useCallback(() => {
-    if (cake < ONE_CAKE) {
-      alert('케익이 없습니다');
-      return;
-    }
-    setCake(cake - ONE_CAKE);
+    setCake((cake) => {
+      if (cake < ONE_CAKE) {
+        alert('케익이 없습니다');
+        return cake;
+      }
+      return cake - ONE_CAKE;
+    });
     onChangeHeight(+80);
-  }, [cake, onChangeHeight]);
+  }, [onChangeHeight]);
+
+  // 부채질
+  const onFan = useCallback(() => {
+    onChangeHeight(+70);
+  }, [onChangeHeight]);
+
+  const onEatMushroom = useCallback(() => {
+    setMushromm((mushroom) => {
+      if (mushroom < ONE_MUSHROOM) {
+        alert('버섯이 없습니다');
+        return mushroom;
+      }
+      onChangeHeight(-50);
+      return mushroom - ONE_MUSHROOM;
+    });
+  }, [onChangeHeight]);
+
+  const onGoOutside = useCallback(() => {
+    if (height < 40 || height > 80) {
+      return alert('키가 40이상 80이하여야 문을 들어갈 수 있습니다.');
+    }
+    setLocation('문 밖');
+  }, [height]);
 
   return (
     <Wrapper>
@@ -80,9 +107,15 @@ const AliceInWonderland: React.FC = () => {
         <Button isRound onClick={onEatCake}>
           케이크를 먹다
         </Button>
-        <Button isRound>부채질하다</Button>
-        <Button isRound>버섯을 먹다</Button>
-        <Button isRound>문을 통과하다</Button>
+        <Button isRound onClick={onFan}>
+          부채질하다
+        </Button>
+        <Button isRound onClick={onEatMushroom}>
+          버섯을 먹다
+        </Button>
+        <Button isRound onClick={onGoOutside}>
+          문을 통과하다
+        </Button>
       </FlexRow>
     </Wrapper>
   );
